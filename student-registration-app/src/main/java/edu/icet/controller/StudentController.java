@@ -1,6 +1,7 @@
 package edu.icet.controller;
 
 import edu.icet.dto.Student;
+import edu.icet.entity.StudentEntity;
 import edu.icet.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ public class StudentController {
     StudentService service;
 
     @GetMapping("/get-student")
-    public List<Student> getStudentList(){
+    public Iterable<StudentEntity> getStudentList(){
         return service.studentList();
     }
 
