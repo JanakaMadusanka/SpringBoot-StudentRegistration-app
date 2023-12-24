@@ -1,5 +1,8 @@
 package edu.icet.service;
 import edu.icet.dto.Student;
+import edu.icet.entity.StudentEntity;
+import edu.icet.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -12,6 +15,9 @@ public class StudentServiceImplV1 implements StudentService {
     ArrayList<Student> studentList = new ArrayList<>();
     @Value("${application.institute:ICM}")
     String instituteName;
+
+    @Autowired
+    StudentRepository repository;
 
     @Override
     public List<Student> studentList() {
@@ -33,6 +39,12 @@ public class StudentServiceImplV1 implements StudentService {
 
     @Override
     public void registerStudent(Student student) {
-        studentList.add(student);
+
+        StudentEntity entity = new StudentEntity();
+        entity.setFirstName(student.getFirstName());
+        entity.setLastName(student.getLastName());
+        entity.setInstitute(student.getInstitute());
+
+        repository.save(entity);
     }
 }
