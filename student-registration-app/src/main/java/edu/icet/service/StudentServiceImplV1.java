@@ -8,22 +8,31 @@ import java.util.List;
 @Service
 public class StudentServiceImplV1 implements StudentService {
 
+
+    ArrayList<Student> studentList = new ArrayList<>();
     @Value("${application.institute:ICM}")
     String instituteName;
 
     @Override
     public List<Student> studentList() {
-        ArrayList<Student> studentList = new ArrayList<>();
+
         studentList.add(new Student(
                 "Janaka",
                 "madusanka",
-                instituteName));
+                instituteName
+        ));
 
         studentList.add(new Student(
                 "Kasun",
                 "Chaturanga",
-                instituteName));
+                instituteName
+        ));
 
         return studentList;
+    }
+
+    @Override
+    public void registerStudent(Student student) {
+        studentList.add(student);
     }
 }
